@@ -9,6 +9,7 @@ body {
 }
 p {
   font-size: 20px;
+
 }
 p.small {
   font-size: 16px;
@@ -31,9 +32,7 @@ h6 {
   text-transform: uppercase;
   font-weight: 700;
 }
-#background_image_div {
-    background-image: "/img/mckeldin.jpg";
-}
+
 hr.star-light,
 hr.star-primary {
   padding: 0;
@@ -70,6 +69,7 @@ hr.star-primary:after {
 .img-centered {
   margin: 0 auto;
 }
+
 header {
   text-align: center;
   background: #18BC9C;

@@ -1,3 +1,10 @@
+mark {
+    background-color: black;
+    color: yellow;
+}
+#left_p{
+  text-align: left;
+}
 #personaImage {
 	width: 100%; 
 	height: 100%
