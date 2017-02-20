@@ -31,6 +31,9 @@ h6 {
   text-transform: uppercase;
   font-weight: 700;
 }
+#background_image_div {
+    background-image: "/img/mckeldin.jpg";
+}
 hr.star-light,
 hr.star-primary {
   padding: 0;
