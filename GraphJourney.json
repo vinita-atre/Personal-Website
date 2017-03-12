@@ -1,0 +1,55 @@
+{
+  "nodes": [
+  	{"id": "Vinita", "group": 1},
+    {"id": "University of Maryland", "group": 8},
+    {"id": "Mumbai University", "group": 8},
+    {"id": "NSI Infinium", "group": 8},
+    {"id": "iOS App development", "group": 3},
+    {"id": "Android App development", "group": 3},
+    {"id": "Hybrid App development", "group": 3},
+    {"id": "User Research", "group": 3},
+    {"id": "Data Visualization", "group": 5},
+    {"id": "Usability Testing", "group": 5},
+    {"id": "HTML/CSS", "group": 9},
+    {"id": "Jquery/ Javascript", "group": 9},
+    {"id": "LucidCharts", "group": 4},
+    {"id": "Invision", "group": 4},
+    {"id": "draw.io", "group": 4},
+    {"id": "pen-paper", "group": 4},
+    {"id": "proto.io", "group": 4},
+    {"id": "Interviewing", "group": 4},
+    {"id": "Surveying", "group": 4},
+    {"id": "Racquetball", "group": 6},
+    {"id": "Photography", "group": 6},
+    {"id": "Dancing", "group": 6}
+
+      ],
+  "links": [
+  	{"source": "Vinita", "target": "University of Maryland", "value": 3, "distance": 100},
+  	{"source": "Vinita", "target": "Mumbai University", "value": 3, "distance": 170},
+  	{"source": "Vinita", "target": "NSI Infinium", "value": 3, "distance": 150},
+  	{"source": "Vinita", "target": "iOS App development", "value": 1, "distance": 250},
+    {"source": "Vinita", "target": "Android App development", "value": 1, "distance": 200},
+  	{"source": "Vinita", "target": "Hybrid App development", "value": 1, "distance": 250},
+  	{"source": "Vinita", "target": "User Research", "value": 1, "distance": 160},
+  	{"source": "Vinita", "target": "Data Visualization", "value": 1, "distance": 100},
+  	{"source": "Vinita", "target": "Usability Testing", "value": 1, "distance": 140},
+  	{"source": "Vinita", "target": "Hybrid App development", "value": 1, "distance": 100},
+  	{"source": "Vinita", "target": "HTML/CSS", "value": 1, "distance": 100},
+  	{"source": "Vinita", "target": "Jquery/ Javascript", "value": 1, "distance": 150},
+  	{"source": "Vinita", "target": "LucidCharts", "value": 1, "distance": 150},
+  	{"source": "Vinita", "target": "Invision", "value": 1, "distance": 100},
+  	{"source": "Vinita", "target": "draw.io", "value": 1, "distance": 200},
+  	{"source": "Vinita", "target": "Data Visualization", "value": 1, "distance": 60},
+  	{"source": "Vinita", "target": "pen-paper", "value": 1, "distance": 50},
+  	{"source": "Vinita", "target": "proto.io", "value": 1, "distance": 40},
+  	{"source": "Vinita", "target": "Interviewing", "value": 1, "distance": 35},
+  	{"source": "Vinita", "target": "Surveying", "value": 1, "distance": 30},
+  	{"source": "Vinita", "target": "Photography", "value": 1, "distance": 200},
+    {"source": "Vinita", "target": "Racquetball", "value": 1, "distance": 220},
+    {"source": "Vinita", "target": "Dancing", "value": 1, "distance": 240}
+  	
+
+    
+  	]
+}

@@ -8,10 +8,27 @@
 	<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" /><!-- My CSS -->
-	<link href="css/portfolio.css" rel="stylesheet" /><!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --><!-- WARNING: Respond.js doesn't work if you view the page via file:// --><!--[if lt IE 9]>
+	<link href="css/portfolio.css" rel="stylesheet" />
+    <script src="https://d3js.org/d3.v4.min.js"></script><!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries --><!-- WARNING: Respond.js doesn't work if you view the page via file:// --><!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+    <style>
+    .links line {
+        stroke: #999;
+        stroke-opacity: 0.6;
+    }
+    
+    .nodes circle {
+        stroke: #fff;
+        stroke-width: 1.5px;
+    }
+    .nodes text{
+        font-size: 10px;
+        font-family: roboto;
+        color: gray;
+    }
+</style>
     </head>
     <body class="index" id="page-top"><!-- Navigation -->
     	<nav class="navbar navbar-default navbar-fixed-top navbar-custom" id="mainNav">
@@ -51,7 +68,7 @@
                 <!-- Header -->
 
         <header>
-                	<div class="container" style="background-image: url(img/mckeldin.jpg); background-repeat: no-repeat; background-position: center; ">
+                	<div class="container" style="background-image: url(img/mckeldin.jpg);background-repeat: no-repeat; background-position: center; ">
 
                 		<div class="row">
                 			<div class="col-lg-12"><img alt="vinita atre" class="img-responsive" src="img/profile.png" style="border: 4px; border-radius: 50%;box-shadow: 3px 3px 6px black; width: 30%" />
@@ -155,17 +172,113 @@
                 				</div>
 
                 				<div class="row">
-                					<div class="col-lg-4 col-lg-offset-2">
-                						<p align = "justify">I am a graduate student for Human Computer Interaction at the University of Maryland. I have a background in Computer Science. I worked for one year as a Software Engineer where I did front end iOS development. During this phase, I realized that I wanted to be more involved in the design process. I wanted to be the thinker and the problem solver. I have a five step approach to tackle problems which is DISCOVER-DEFINE-DESIGN-PLAN-LAUNCH.</p>
+                                    <div class="col-lg-8 col-lg-offset-2">
+                                    
+                					   <!-- SVG code -->
+                                       <svg viewBox ="0,0,400,400" ></svg><script src="https://d3js.org/d3.v4.min.js"></script>
+<script>
 
-                						<p align = "justify" >My research interests include IoT, ubiquitous Computing, Mobile and VR technology, AI and machine learning.</p>
-                					</div>
+    var svg = d3.select("svg"),
+        width = 400;//+svg.attr("width"),
+        height = 400;//+svg.attr("height");
 
-                					<div class="col-lg-4">
+
+    var color = d3.scaleOrdinal(d3.schemeCategory20);
+
+    var simulation = d3.forceSimulation()
+        .force("link", d3.forceLink().id(function (d) {
+            return d.id;
+        }).distance(function(d){ return d.distance;}).strength(1))
+        .force("charge", d3.forceManyBody())
+        .force("center", d3.forceCenter(width/2, height/2));
+
+    d3.json("GraphJourney.json", function (error, graph) {
+        if (error) throw error;
+
+        var link = svg.append("g")
+            .attr("class", "links")
+            .selectAll("line")
+            .data(graph.links)
+            .enter().append("line")
+            .attr("stroke-width", function (d) {
+                return Math.sqrt(d.value);
+            })
+            .attr("linkDistance", function (d) {
+                return (d.distance);
+            });
+
+        var node = svg.append("g")
+            .attr("class", "nodes")
+            .selectAll("g")
+            .data(graph.nodes)
+            .enter().append("g")
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        node.append("circle")
+            .attr("r", 10)
+            .attr("fill", function (d) {
+                return color(d.group);
+            })
+
+        node.append("text")
+            .text(function (d) {
+                return d.id;
+            });
+
+        simulation
+            .nodes(graph.nodes)
+            .on("tick", ticked);
+
+        simulation.force("link")
+            .links(graph.links);
+
+        function ticked() {
+            link
+                .attr("x1", function (d) {
+                    return d.source.x;
+                })
+                .attr("y1", function (d) {
+                    return d.source.y;
+                })
+                .attr("x2", function (d) {
+                    return d.target.x;
+                })
+                .attr("y2", function (d) {
+                    return d.target.y;
+                });
+
+            node.attr("transform", function (d) {
+                return "translate(" + d.x + "," + d.y + ")";
+            });
+        }
+    });
+
+    function dragstarted(d) {
+        if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+    }
+
+    function dragged(d) {
+        d.fx = d3.event.x;
+        d.fy = d3.event.y;
+    }
+
+    function dragended(d) {
+        if (!d3.event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+    }
+</script>
+                                        <p align= "center" style="color:red"><i> Interactive SVG created using D3 - Drag nodes to view clusters</i></p>
+                                        <p align="justify">I am a graduate student for Human Computer Interaction at the University of Maryland. I have a background in Computer Science. I worked for one year as a Software Engineer where I did front end iOS development. During this phase, I realized that I wanted to be more involved in the design process. I wanted to be the thinker and the problem solver. I have a five step approach to tackle problems which is DISCOVER-DEFINE-DESIGN-PLAN-LAUNCH.</p>
                 						<p align= "justify">Currently, I am seeking internship opportunities in the UX/UI field. Feel free to go through my website and browse my projects and connect with me as well as view my resume. I believe in continuous learning and improvement through iterations. I am open to feedback and constructive criticism on my projects as well as the design of my website. I look forward to hearing from you.</p>
-                						<p align= "justify">My  skills include HTML, CSS, Jquery, Javascript for live prototyping. I use LucidCharts, draw.io and pen-paper for wireframing my designs. For creating high-fidelity prototypes, I use proto.io and Invision.</p>    
-
-                						<p align= "justify">During my leisure time, I enjoy playing racquetball, dancing, reading and photography.</p>    
+                						    
+                                        <p align = "justify" >My research interests include IoT, ubiquitous Computing, Mobile and VR technology, AI and machine learning.</p>
+                						   
                 					</div>
 
                 					<div class="col-lg-8 col-lg-offset-2 text-center"><a class="btn btn-lg btn-outline" href="https://drive.google.com/open?id=0B8ehj_dhcf07TllWeXFlYWRCVG8" target="_blank">View Resume </a>
